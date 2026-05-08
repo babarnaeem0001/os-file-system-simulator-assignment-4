@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OS File System Simulator - Assignment 4
+
+Interactive web application for **CS313 Operating System Concepts, Assignment 4:
+File System Simulation**.
+
+## Team Members
+
+| Name | Student ID |
+| --- | --- |
+| Hamid Saleem | 9061 |
+| Babar Naeem | 8963 |
+| Muhammad Sabeel Khan | 8926 |
+| Abdul Sami | 8929 |
+
+## Assignment Scope
+
+This project implements only Assignment 4 from the provided brief. It simulates:
+
+- File creation, deletion, reading, and writing.
+- Contiguous, linked, and indexed file allocation.
+- A disk block map with index/data block distinction.
+- Disk usage, free blocks, fragmentation, access time, active locks, and waiting requests.
+- Process-based file access through read/write locks.
+- Shared-file conflict scenarios with deadlock detection and recovery.
+
+## Tech Stack
+
+- Next.js App Router
+- React and TypeScript
+- Tailwind CSS
+- Vercel-compatible route handler backend at `/api/filesystem`
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Backend Contract
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The frontend posts the current simulation state and a simulation action to:
 
-## Learn More
+```text
+POST /api/filesystem
+```
 
-To learn more about Next.js, take a look at the following resources:
+The route handler returns the next state, including updated disk blocks, locks,
+requests, metrics, deadlock cycles, and event logs. This keeps the app deployable
+on Vercel serverless infrastructure without requiring a database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Verification
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npm run build
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push the repository to GitHub, import it into Vercel, and keep the default Next.js
+settings. Vercel automatically builds the frontend and route handler backend.
